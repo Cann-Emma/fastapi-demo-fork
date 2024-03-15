@@ -32,6 +32,10 @@ def add_me(number_1: int, number_2: int):
 
 # Let's develop a new one:
 
+@app.get("/multiplication/{num1}/{num2}")
+def multiplication(num1, num2):
+    multiplication= int(num1*num2)
+    return {"multiplication": multiplication}
 
 ## Parameters
 # Introduce parameter data types and defaults from the Optional library

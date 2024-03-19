@@ -3,6 +3,8 @@
 from fastapi import FastAPI
 from typing import Optional
 from pydantic import BaseModel
+import json 
+import requests
 # import boto3
 
 app = FastAPI()
@@ -18,6 +20,12 @@ app = FastAPI()
 def zone_apex():
     return {"Hello": "World"}
 
+@app.get("/github/repos/{user}")
+def get_my_repos(user):
+    url= "https://api.github.com/users/"+ user + "/repos"
+    response= requests.get(url) 
+    body= json.loads(response.text)
+    return {"repos": body} # returning a key-value pair because it is in json
 
 # Endpoints and Methods
 # /blah - endpoint
@@ -36,6 +44,12 @@ def add_me(number_1: int, number_2: int):
 def multiply(num1: int, num2: int):
     multiply= num1 * num2
     return {"multiply": multiply}
+
+# Test two
+@app.get("/divide/{num1}/{num2}")
+def divide(num1:int, num2: int):
+    divide= num1/num2
+    return {"divide":divide}
 
 ## Parameters
 # Introduce parameter data types and defaults from the Optional library
@@ -68,6 +82,7 @@ class Item(BaseModel):
     description: Optional[str] = None
     price: float
     tax: Optional[float] = None
+
 
 # Start using the "Item" BaseModel
 # Post / Delete / Patch methods

@@ -51,6 +51,13 @@ def divide(num1:int, num2: int):
     divide= num1/num2
     return {"divide":divide}
 
+
+@app.get("/critical_value_quartile/{num}}"
+def critical_value_quartiles(num:int):
+   quartile= (1-num)/2
+   quartile2= value + quartile
+   return {"critical_value_quartile": (quartile, quartile2)
+ 
 ## Parameters
 # Introduce parameter data types and defaults from the Optional library
 @app.get("/items/{item_id}")

@@ -54,7 +54,7 @@ def divide(num1:int, num2: int):
 
 @app.get("/critical_value_quartile/{num}")
 def critical_value_quartiles(num:float):
-   quartile= (1-num)/2
+   quartile= round((1-num)/2, 3)
    quartile2= num + quartile
    return {"critical_value_quartile": (quartile, quartile2)}
  

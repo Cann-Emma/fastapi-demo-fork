@@ -5,9 +5,19 @@ from typing import Optional
 from pydantic import BaseModel
 import json 
 import requests
+import os
+import MySQLdb
+from fastapi.staticfiles import StaticFiles
 # import boto3
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static", html=True), name="static")
+
+DBHOST = os.environ.get('DBHOST')
+DBUSER = os.environ.get('DBUSER')
+DBPASS = os.environ.get('DBPASS')
+DB = "zgb8ts" 
 
 # The URL for this API has a /docs endpoint that lets you see and test
 # your various endpoints/methods.

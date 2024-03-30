@@ -30,6 +30,25 @@ DB = "zgb8ts"
 def zone_apex():
     return {"Hello": "World"}
 
+@app.get("/albums")
+def get_albums():
+    db= MySQLdb.connect(host= DBHOST, user= DBUSER, passwd= DBPASS , db= DB)
+    c = db.cursor(MySQLdb.cursors.DictCursor)
+    c.execute("""SELECT * FROM albums ORDER BY name""")
+    results = c.fetchall()
+    db.close()
+    return results
+
+
+@app.get("/albums")
+def get_all_albums():
+    db = MySQLdb.connect(host=DBHOST, user=DBUSER, passwd=DBPASS, db=DB)
+    c = db.cursor(MySQLdb.cursors.DictCursor)
+    c.execute("SELECT * FROM albums ORDER BY name")
+    results = c.fetchall()
+    db.close()
+    return results
+
 @app.get("/github/repos/{user}")
 def get_my_repos(user):
     url= "https://api.github.com/users/"+ user + "/repos"
